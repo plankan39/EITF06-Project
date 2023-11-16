@@ -1,0 +1,44 @@
+services:
+    # nginx
+    web:
+        image: nginx:latest
+        ports:
+            - "80:80"
+        volumes:
+            - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+    # php
+    app:
+        build:
+            dockerfile: ./php/Dockerfile
+        volumes:
+            - /var/www/html/vendor
+            - ./app:/var/www/html
+        environment:
+            MYSQL_HOST: db
+            MYSQL_PORT: ${MYSQL_PORT}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+    # mysql
+    db:
+        image: mysql:latest
+        volumes:
+            # - mysqldata:/var/lib/mysql
+            - "./db/initdb.d:/docker-entrypoint-initdb.d"
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - 8001:80
+        environment:
+            - PMA_HOST=db
+            - PMA_PORT=3306
+
+
+# volumes:
+#     mysqldata:
