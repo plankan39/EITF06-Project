@@ -1,20 +1,18 @@
+
 <?php
-session_start();
-
-if (!isset($_SESSION["user"])) {
-  header('Location: signin.php');
-  exit();
-}
-
-use App\Database\TaskAccess;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+use App\Database\UserAccess;
 
-$taskAccess = new TaskAccess();
-$tasks = $taskAccess->findAll();
 
+if($_SERVER["REQUEST_METHOD"] === "POST"){
+  $email = $_POST["email"];
+  $pw = $_POST["password"];
+
+  $ua = new UserAccess();
+  $ua -> addUser($email, $pw);
+}
 ?>
-
 <!doctype html>
 <html lang="en">
 
@@ -27,15 +25,14 @@ $tasks = $taskAccess->findAll();
 </head>
 
 <body>
-  <div class="bg-dark text-secondary text-center" style="height: 100vh">
-    <h1>Tasks</h1>
+  <form action="signup.php" method="post">
+    <label>email</label>
+    <input type="text" name="email">
+    <label>password</label>
+    <input type="password" name="password">
     
-    <?php foreach ($tasks as $task): ?>
-      <h2><?php echo $task->getTitle(); ?></h2>
-      <p><?php echo $task->getDescription(); ?></p>
-    <?php endforeach; ?>
-  </div>
-
+    <input type="submit" value="Sign up">
+  </form>
 </body>
 
 </html>

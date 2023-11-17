@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db:3306
--- Generation Time: Nov 16, 2023 at 02:15 PM
+-- Generation Time: Nov 17, 2023 at 09:50 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -42,6 +42,26 @@ INSERT INTO `taskitem` (`id`, `title`, `description`, `completed`) VALUES
 (1, 'First task', 'Get web server to display first task', 0),
 (2, 'Task 2', 'Get a whole list of tasks to show', 0);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int UNSIGNED NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password_hash` varchar(256) NOT NULL,
+  `salt` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `email`, `password_hash`, `salt`) VALUES
+(1, 'lukas.elmlund@gmail.com', 'pw', NULL);
+
 --
 -- Indexes for dumped tables
 --
@@ -53,6 +73,13 @@ ALTER TABLE `taskitem`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -61,6 +88,12 @@ ALTER TABLE `taskitem`
 --
 ALTER TABLE `taskitem`
   MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
