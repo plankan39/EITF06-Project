@@ -1,18 +1,26 @@
-
 <?php
-
+session_start();
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 use App\Database\UserAccess;
 
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
 
-if($_SERVER["REQUEST_METHOD"] === "POST"){
-  $email = $_POST["email"];
-  $pw = $_POST["password"];
+    $ua = new UserAccess();
+    $user = $ua->authenticateUser($email, $password);
 
-  $ua = new UserAccess();
-  $user = $ua -> authenticateUser($email, $pw);
+    if ($user) {
+        // Start a session and store relevant user information
+        
+        $_SESSION["user"] = $user;
 
-  echo "user is {$user->getEmail()}";
+        // Redirect to index.php
+        header('Location: index.php');
+        exit();
+    } else {
+        echo "Authentication failed. Please check your email and password.";
+    }
 }
 ?>
 <!doctype html>
@@ -28,9 +36,9 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
 <body>
   <form action="signin.php" method="post">
-    <label>email</label>
+    <label>Email</label>
     <input type="text" name="email">
-    <label>password</label>
+    <label>Password</label>
     <input type="password" name="password">
     
     <input type="submit" value="Sign in">
