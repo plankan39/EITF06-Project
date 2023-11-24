@@ -60,7 +60,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `password_hash`, `salt`) VALUES
-(1, 'lukas.elmlund@gmail.com', 'pw', NULL);
+(1, 'lukas.elmlund@gmail.com', 'pw', '123');
+
+INSERT INTO `user` (`id`, `email`, `password_hash`, `salt`) VALUES
+(2, 'ruben.tapptorp@gmail.com', 'pw', '234');
 
 --
 -- Indexes for dumped tables
