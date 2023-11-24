@@ -31,10 +31,40 @@ $items = $itemAccess->findAll();
     <h1>Tasks</h1>
     
     <?php foreach ($items as $item): ?>
-      <h2><?php echo $item->getName(); ?></h2>
-      <p><?php echo $item->getDescription(); ?></p>
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title"><?php echo $item->getName(); ?></h5>
+          <p class="card-text"><?php echo $item->getDescription(); ?></p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <form action="index.php", method="post">
+            <button class="btn btn-primary" type="submit" name="itemId" value=<?php echo $item->getId(); ?>>Add to cart</button>
+          </form>
+        </div>
+      </div>
     <?php endforeach; ?>
   </div>
+
+<?php 
+if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["itemId"]) {
+  if (!array_key_exists("cart", $_SESSION)) {
+    $_SESSION["cart"] = array();
+  }
+  $itemId = $_POST["itemId"];
+
+  if (!array_key_exists($itemId, $_SESSION["cart"])) {
+    $_SESSION["cart"][$itemId] = 0;
+  }
+
+  $_SESSION["cart"][$itemId]++;
+
+  foreach ($_SESSION["cart"] as $key => $value) {
+    echo $key . ": " . $value . "<br>";
+  }
+}
+
+
+?>
 
 </body>
 
