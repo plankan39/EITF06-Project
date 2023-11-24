@@ -12,7 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($user) {
         // Start a session and store relevant user information
-        
         $_SESSION["user"] = $user;
 
         // Redirect to index.php

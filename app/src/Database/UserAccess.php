@@ -29,12 +29,18 @@ class UserAccess extends DataAccess {
      * @param mixed $email
      * @param mixed $password
      */
-    public function authenticateUser($email, $password): User {
+    public function authenticateUser($email, $password): User|null {
       $passwordHash = $password;
       $sql = "SELECT * FROM {$this->table} WHERE email = :email AND password_hash = :password_hash";
       $stmt = $this->connection->prepare($sql);
       $stmt->execute([':email' => $email, ':password_hash' => $passwordHash]);
+      
+      if ($stmt->rowCount() === 0) {
+        return null;
+      }
+
       $stmt->setFetchMode(\PDO::FETCH_CLASS, User::class);
       return $stmt->fetch();
+
     }
 }
