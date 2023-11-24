@@ -6,12 +6,12 @@ if (!isset($_SESSION["user"])) {
   exit();
 }
 
-use App\Database\TaskAccess;
+use App\Database\ItemAccess;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-$taskAccess = new TaskAccess();
-$tasks = $taskAccess->findAll();
+$itemAccess = new ItemAccess();
+$items = $itemAccess->findAll();
 
 ?>
 
@@ -30,9 +30,9 @@ $tasks = $taskAccess->findAll();
   <div class="bg-dark text-secondary text-center" style="height: 100vh">
     <h1>Tasks</h1>
     
-    <?php foreach ($tasks as $task): ?>
-      <h2><?php echo $task->getTitle(); ?></h2>
-      <p><?php echo $task->getDescription(); ?></p>
+    <?php foreach ($items as $item): ?>
+      <h2><?php echo $item->getName(); ?></h2>
+      <p><?php echo $item->getDescription(); ?></p>
     <?php endforeach; ?>
   </div>
 
