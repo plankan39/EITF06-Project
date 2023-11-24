@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class User {
+class Item {
     private int $id;
     private string $name;
     private string $description;
