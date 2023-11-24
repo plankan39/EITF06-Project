@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db:3306
--- Generation Time: Nov 17, 2023 at 09:50 AM
+-- Generation Time: Nov 24, 2023 at 09:01 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -24,27 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `taskitem`
---
-
-CREATE TABLE `taskitem` (
-  `id` int UNSIGNED NOT NULL,
-  `title` varchar(200) NOT NULL,
-  `description` text,
-  `completed` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `taskitem`
---
-
-INSERT INTO `taskitem` (`id`, `title`, `description`, `completed`) VALUES
-(1, 'First task', 'Get web server to display first task', 0),
-(2, 'Task 2', 'Get a whole list of tasks to show', 0);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `user`
 --
 
@@ -60,20 +39,12 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `password_hash`, `salt`) VALUES
-(1, 'lukas.elmlund@gmail.com', 'pw', '123');
-
-INSERT INTO `user` (`id`, `email`, `password_hash`, `salt`) VALUES
+(1, 'lukas.elmlund@gmail.com', 'pw', '123'),
 (2, 'ruben.tapptorp@gmail.com', 'pw', '234');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `taskitem`
---
-ALTER TABLE `taskitem`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user`
@@ -87,16 +58,10 @@ ALTER TABLE `user`
 --
 
 --
--- AUTO_INCREMENT for table `taskitem`
---
-ALTER TABLE `taskitem`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
