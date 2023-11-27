@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["itemId"]) {
           <ul class="list-group">
 
           <?php foreach ($_SESSION["cart"] as $itemId => $cartItem): ?>
-          <li class='list_group-item'>
+          <li class='list-group-item'>
             <?php echo $cartItem["item"]->getName() . "(" . $cartItem["amount"] . "): " . $cartItem["amount"] * $cartItem["item"]->getPrice() . "kr"?>
           </li>
           <?php endforeach; ?>
