@@ -10,6 +10,7 @@ RUN cd /app && \
 # Add actual source code.
 ADD ./payment/SimpleCoin/simpleCoin/miner.py /app
 ADD ./payment/SimpleCoin/simpleCoin/miner_config.py /app
+ADD ./payment/SimpleCoin/simpleCoin/wallet.py /app
 
 EXPOSE 5000
 
