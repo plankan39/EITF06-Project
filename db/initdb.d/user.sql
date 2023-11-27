@@ -41,6 +41,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `email`, `password_hash`, `salt`) VALUES
 (1, 'lukas.elmlund@gmail.com', 'pw', '123'),
 (2, 'ruben.tapptorp@gmail.com', 'pw', '234');
+(3, 'jesper1519@outlook.com', 'pw', '345')
 
 --
 -- Indexes for dumped tables
