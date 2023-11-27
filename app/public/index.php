@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["itemId"]) {
 <body>
   <div class="bg-dark text-secondary text-center" style="height: 100vh">
       <div class="row">
-        <p>Welcome, <?php echo isset($_SESSION["user"])?$_SESSION["user"]->getEmail():"" ?>
+        <p>Welcome, <?php echo isset($_SESSION["user"])?$_SESSION["user"]->getEmail():"" ?></p>
       </div>
       <div class="row">
         <div class="col-sm-8">
@@ -78,6 +78,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["itemId"]) {
           </li>
           <?php endforeach; ?>
           </ul>
+           <!-- Add a button to navigate to payment.php -->
+           <a href="confirmpayment.php" class="btn btn-success mt-3">Proceed to Payment</a>
         </div>
       </div>
   </div>
