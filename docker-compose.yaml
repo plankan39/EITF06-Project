@@ -20,6 +20,9 @@ services:
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
+    payment:
+        build:
+            dockerfile: ./payment/Dockerfile
     # mysql
     db:
         image: mysql:latest
