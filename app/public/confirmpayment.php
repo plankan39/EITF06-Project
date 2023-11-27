@@ -15,8 +15,8 @@
             <h1>Confirm Payment</h1>
             <form action="process_payment.php" method="post">
                 <div class="mb-3">
-                    <label for="paymentInfo" class="form-label">Enter your Hash</label>
-                    <input type="text" class="form-control" id="paymentInfo" name="paymentInfo" placeholder="Enter your Hash">
+                    <label for="paymentInfo" class="form-label">Our public key: OsGUOWtF/E+1O3gwhOW70uDMzJAi0dAm4LWz9ZNHhBYu3t77w1izC0wS5w72IZ476/YiOmp49b+HYFI39c++eg==</label>
+                    <input type="text" class="form-control" id="paymentInfo" name="paymentInfo" placeholder="Enter hash here">
                 </div>
                 <button type="submit" class="btn btn-primary">Confirm</button>
             </form>
