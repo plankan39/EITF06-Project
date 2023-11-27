@@ -1,9 +1,9 @@
 <?php
-session_start();
-require_once dirname(__DIR__) . '/vendor/autoload.php';
-use App\Database\UserAccess;
+  session_start();
+  require_once dirname(__DIR__) . '/vendor/autoload.php';
+  use App\Database\UserAccess;
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
@@ -11,16 +11,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $user = $ua->authenticateUser($email, $password);
 
     if ($user) {
-        // Start a session and store relevant user information
-        $_SESSION["user"] = $user;
+      // Start a session and store relevant user information
+      $_SESSION["user"] = $user;
 
-        // Redirect to index.php
-        header('Location: index.php');
-        exit();
+      // Redirect to index.php
+      header('Location: index.php');
+      exit();
     } else {
         echo "Authentication failed. Please check your email and password.";
     }
-}
+  }
 ?>
 <!doctype html>
 <html lang="en">
@@ -34,14 +34,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 
 <body>
-  <form action="signin.php" method="post">
-    <label>Email</label>
-    <input type="text" name="email">
-    <label>Password</label>
-    <input type="password" name="password">
-    
-    <input type="submit" value="Sign in">
-  </form>
+  <div height: "100vh">
+    <form class="needs-validation" action="signin.php" method="post" novalidate>
+      <div class="form-group">
+        <label for="emailField" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="emailField" placeholder="Enter email" name="email" required>
+        <div class="invalid-feedback">
+          Please write your email.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
+        <div class="invalid-feedback">
+          Please write your password.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Sign in</button>
+      <button type="button" class="btn btn-secondary" onClick="window.location = '/signup.php'">Sign up</button>
+    </form>
+  </div>
 </body>
 
 </html>

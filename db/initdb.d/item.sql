@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `item` (
   `id` int UNSIGNED NOT NULL,
   `name` varchar(200) NOT NULL,
+  `price` DECIMAL(8, 2) UNSIGNED NOT NULL,
   `description` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -37,9 +38,10 @@ CREATE TABLE `item` (
 -- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`id`, `name`, `description`) VALUES
-(1, 'Item 1', 'Very nice Item 1'),
-(2, 'Item 2', 'Very nice Item 2');
+INSERT INTO `item` (`id`, `name`, `price`, `description`) VALUES
+(1, 'Item 1', 100.25, 'Very nice Item 1'),
+(3, 'Item 3', 32.25, 'Very nice Item 3'),
+(2, 'Item 2', 50.72, 'Very nice Item 2');
 
 --
 -- Indexes for dumped tables

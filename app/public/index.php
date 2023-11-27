@@ -1,4 +1,6 @@
 <?php
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+use App\Database\ItemAccess;
 session_start();
 
 if (!isset($_SESSION["user"])) {
@@ -6,13 +8,31 @@ if (!isset($_SESSION["user"])) {
   exit();
 }
 
-use App\Database\ItemAccess;
 
-require_once dirname(__DIR__) . '/vendor/autoload.php';
+
 
 $itemAccess = new ItemAccess();
 $items = $itemAccess->findAll();
 
+if (!isset($_SESSION["cart"])) {
+  $_SESSION["cart"] = array();
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["itemId"]) {
+  $itemId = (int) $_POST["itemId"];
+
+  $matches = array_filter($items, function($it) use($itemId) {
+    return $it->getId() === $itemId;
+  });
+  $choosenItem = array_pop($matches);
+
+  if (!array_key_exists($itemId, $_SESSION["cart"])) {
+    $_SESSION["cart"][$itemId] = array("item"=>$choosenItem, "amount"=>0);
+  }
+
+  $_SESSION["cart"][$itemId]["amount"]++;
+
+}
 ?>
 
 <!doctype html>
@@ -28,43 +48,40 @@ $items = $itemAccess->findAll();
 
 <body>
   <div class="bg-dark text-secondary text-center" style="height: 100vh">
-    <h1>Tasks</h1>
-    
-    <?php foreach ($items as $item): ?>
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title"><?php echo $item->getName(); ?></h5>
-          <p class="card-text"><?php echo $item->getDescription(); ?></p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-          <form action="index.php", method="post">
-            <button class="btn btn-primary" type="submit" name="itemId" value=<?php echo $item->getId(); ?>>Add to cart</button>
-          </form>
+      <div class="row">
+        <p>Welcome, <?php echo isset($_SESSION["user"])?$_SESSION["user"]->getEmail():"" ?>
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <h1>Webshop</h1>
+          <?php foreach ($items as $item): ?>
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="..." alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title"><?php echo $item->getName(); ?></h5>
+                <p class="card-text"><?php echo $item->getDescription(); ?></p>
+                <p class="card-text"><?php echo $item->getPrice(); ?></p>
+                <form action="index.php", method="post">
+                  <button class="btn btn-primary" type="submit" name="itemId" value=<?php echo $item->getId(); ?>>Add to cart</button>
+                </form>
+              </div>
+            </div>
+          <?php endforeach; ?>
+        </div>
+        <div class="col-sm-4">
+          <h2>Cart</h2>
+          <ul class="list-group">
+
+          <?php foreach ($_SESSION["cart"] as $itemId => $cartItem): ?>
+          <li class='list_group-item'>
+            <?php echo $cartItem["item"]->getName() . "(" . $cartItem["amount"] . "): " . $cartItem["amount"] * $cartItem["item"]->getPrice() . "kr"?>
+          </li>
+          <?php endforeach; ?>
+          </ul>
         </div>
       </div>
-    <?php endforeach; ?>
   </div>
 
-<?php 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["itemId"]) {
-  if (!array_key_exists("cart", $_SESSION)) {
-    $_SESSION["cart"] = array();
-  }
-  $itemId = $_POST["itemId"];
-
-  if (!array_key_exists($itemId, $_SESSION["cart"])) {
-    $_SESSION["cart"][$itemId] = 0;
-  }
-
-  $_SESSION["cart"][$itemId]++;
-
-  foreach ($_SESSION["cart"] as $key => $value) {
-    echo $key . ": " . $value . "<br>";
-  }
-}
-
-
-?>
 
 </body>
 

@@ -25,14 +25,26 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 </head>
 
 <body>
-  <form action="signup.php" method="post">
-    <label>email</label>
-    <input type="text" name="email">
-    <label>password</label>
-    <input type="password" name="password">
-    
-    <input type="submit" value="Sign up">
-  </form>
+  <div height: "100vh">
+    <form action="signup.php" method="post">
+      <div class="form-group">
+        <label for="emailField" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="emailField" placeholder="Enter email" name="email" required>
+        <div class="invalid-feedback">
+          Please write your email.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
+        <div class="invalid-feedback">
+          Please write your password.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Sign up</button>
+      <button type="button" class="btn btn-secondary" onClick="window.location = '/signin.php'">Sign in</button>
+    </form>
+  </div>
 </body>
 
 </html>
