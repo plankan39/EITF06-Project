@@ -23,6 +23,8 @@ services:
     payment:
         build:
             dockerfile: ./payment/Dockerfile
+        ports:
+            - "5000:5000"
     # mysql
     db:
         image: mysql:latest
