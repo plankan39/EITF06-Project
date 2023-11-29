@@ -37,18 +37,6 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-<<<<<<< HEAD
-INSERT INTO `user` (`id`, `email`, `password_hash`) VALUES
-(1, 'lukas.elmlund@gmail.com', 'pw'),
-(2, 'ruben.tapptorp@gmail.com', 'pw'),
-(3, 'jesper1519@outlook.com', 'pw');
-=======
-INSERT INTO `user` (`id`, `email`, `password_hash`, `salt`) VALUES
-(1, 'lukas.elmlund@gmail.com', 'pw', '123'),
-(2, 'ruben.tapptorp@gmail.com', 'pw', '234'),
-(3, 'jesper1519@outlook.com', 'pw', '345');
->>>>>>> 9f4c71cf33c246a3d4975c281db54aa2de7c7138
-
 --
 -- Indexes for dumped tables
 --
