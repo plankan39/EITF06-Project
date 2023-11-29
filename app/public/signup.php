@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $number    = preg_match('@[0-9]@', $pw);
   $specialChars = preg_match('@[^\w]@', $pw);
 
-if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($pw) < 8) {
+if($uppercase && $lowercase && $number && $specialChars && strlen($pw) >= 8) {
   echo 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
 }else{
   $ua = new UserAccess();
@@ -39,7 +39,7 @@ if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($pw) < 8) 
     <form action="signup.php" method="post">
       <div class="form-group">
         <label for="emailField" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="emailField" placeholder="Enter email" name="email" required>
+        <input type="text" class="form-control" id="emailField" placeholder="Enter email" name="email" required>
         <div class="invalid-feedback">
           Please write your email.
         </div>
