@@ -1,26 +1,26 @@
 <?php
-  session_start();
-  require_once dirname(__DIR__) . '/vendor/autoload.php';
-  use App\Database\UserAccess;
+session_start();
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+use App\Database\UserAccess;
 
-  if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $email = $_POST["email"];
-    $password = $_POST["password"];
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  $email = $_POST["email"];
+  $password = $_POST["password"];
 
-    $ua = new UserAccess();
-    $user = $ua->authenticateUser($email, $password);
+  $ua = new UserAccess();
+  $user = $ua->authenticateUser($email, $password);
 
-    if ($user) {
-      // Start a session and store relevant user information
-      $_SESSION["user"] = $user;
+  if ($user) {
+    // Start a session and store relevant user information
+    $_SESSION["user"] = $user;
 
-      // Redirect to index.php
-      header('Location: index.php');
-      exit();
-    } else {
-        echo "Authentication failed. Please check your email and password.";
-    }
+    // Redirect to index.php
+    header('Location: index.php');
+    exit();
+  } else {
+    echo "Authentication failed. Please check your email and password.";
   }
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -45,7 +45,8 @@
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password"
+          required>
         <div class="invalid-feedback">
           Please write your password.
         </div>

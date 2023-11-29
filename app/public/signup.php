@@ -1,16 +1,15 @@
-
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 use App\Database\UserAccess;
 
 
-if($_SERVER["REQUEST_METHOD"] === "POST"){
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $email = $_POST["email"];
   $pw = $_POST["password"];
 
   $ua = new UserAccess();
-  $ua -> addUser($email, $pw);
+  $ua->addUser($email, $pw);
 }
 ?>
 <!doctype html>
@@ -36,7 +35,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password"
+          required>
         <div class="invalid-feedback">
           Please write your password.
         </div>
