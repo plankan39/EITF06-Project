@@ -6,7 +6,6 @@ class User {
     private int $id;
     private string $email;
     private string $password_hash;
-    private string $salt;
 
     public const TABLE = 'user';
 
