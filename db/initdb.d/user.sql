@@ -30,13 +30,19 @@ SET time_zone = "+00:00";
 CREATE TABLE `user` (
   `id` int UNSIGNED NOT NULL,
   `email` varchar(50) NOT NULL,
+  `post_address` varchar(256) NOT NULL,
   `password_hash` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 --
 -- Dumping data for table `user`
 --
 
+INSERT INTO `user` (`id`, `email`, `post_address`, `password_hash`) VALUES
+(3, 'lukas.elmlund@gmail.com', 'Dag Hammarskjölds Väg 5J', '$2y$10$8R3PvC2rJQHfctmOxRw0Lu9A5qVWt7uq5dbTtQwWFRIQShSEy3GYK'),
+(4, 'ruben.tapptorp@gmail.com', 'Fagottgränden 23A', '$2y$10$XCL2WmmX/OqLxbOj4KvKd.21qQNeeShf19sC1mEchsedDUHQW3.oW'),
+(5, 'jesper1519@outlook.com', 'Kristianstad', '$2y$10$t6vmICo88GbnOc5CXHun3ecF9QaGaVqBGEl.ZyfmCaoXgTvPjHF5W');
 --
 -- Indexes for dumped tables
 --

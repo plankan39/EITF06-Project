@@ -7,9 +7,20 @@ use App\Database\UserAccess;
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $email = $_POST["email"];
   $pw = $_POST["password"];
+  $address = $_POST["post-address"];
+  // Validate password strength
+  $uppercase = preg_match('@[A-Z]@', $pw);
+  $lowercase = preg_match('@[a-z]@', $pw);
+  $number    = preg_match('@[0-9]@', $pw);
+  $specialChars = preg_match('@[^\w]@', $pw);
 
+if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($pw) < 8) {
+  echo 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
+}else{
   $ua = new UserAccess();
-  $ua->addUser($email, $pw);
+  $ua->addUser($email, $pw, $address);
+}
+
 }
 ?>
 <!doctype html>
@@ -37,8 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <label for="exampleInputPassword1" class="form-label">Password</label>
         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password"
           required>
-        <div class="invalid-feedback">
-          Please write your password.
+        <div>
+        <?php 
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($pw) < 8)) {
+          echo 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
+        }
+        ?>
         </div>
       </div>
       <div class="form-group">

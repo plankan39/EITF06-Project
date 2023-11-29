@@ -17,12 +17,14 @@ class UserAccess extends DataAccess {
     /**
      * @param mixed $email
      * @param mixed $password
+     * @param mixed $post_address
      */
-    public function addUser($email, $password): void {
-      $sql = "INSERT INTO {$this->table}(email, password_hash) VALUES(:email, :password_hash)";
+    public function addUser($email, $password, $post_address): void {
+      $sql = "INSERT INTO {$this->table}(email, password_hash, post_address) VALUES(:email, :password_hash, :post_address)";
       $statement = $this->connection->prepare($sql)->execute([
         ':email' => $email,
-        ':password_hash' => password_hash($password, PASSWORD_BCRYPT)
+        ':password_hash' => password_hash($password, PASSWORD_BCRYPT),
+        ':post_address' => $post_address
       ]);
     }
     /**
