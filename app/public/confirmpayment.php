@@ -1,6 +1,15 @@
 <?php
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 session_start();
+
+$totalPrice = array_reduce(
+  $_SESSION["cart"],
+  function ($sum, $item) {
+    return $sum + $item["item"]->getPrice() * $item["amount"];
+  },
+  0
+);
+
 ?>
 
 <!DOCTYPE html>
@@ -16,17 +25,55 @@ session_start();
 
 <body>
   <div class="bg-dark text-secondary text-center" style="height: 100vh">
-    <ul class="list-group">
-      <?php foreach ($_SESSION["cart"] as $itemId => $cartItem): ?>
-        <li class='list-group-item'>
-          <?php
-          echo $cartItem["item"]->getName() . "(" . $cartItem["amount"] . "): " . $cartItem["amount"] * $cartItem["item"]->getPrice() . "kr"
-            ?>
-        </li>
-      <?php endforeach; ?>
-    </ul>
     <div class="container">
       <h1>Confirm Payment</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Item</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Item Price</th>
+            <th scope="col">Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <?php foreach ($_SESSION["cart"] as $itemId => $cartItem): ?>
+            <tr>
+              <th scope="row">
+                <?php echo $cartItem["item"]->getId(); ?>
+              </th>
+              <td>
+                <?php echo $cartItem["item"]->getName(); ?>
+              </td>
+              <td>
+                <?php echo $cartItem["amount"] ?>
+              </td>
+              <td>
+                <?php echo $cartItem["item"]->getPrice(); ?>
+              </td>
+              <td>
+                <?php echo $cartItem["amount"] * $cartItem["item"]->getPrice(); ?>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+          <tr>
+            <th scope="row">Total </th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <?php echo $totalPrice; ?>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Please submit a payment of
+        <?php echo $totalPrice; ?> SimpleCoin to the following address
+      </h2>
+
       <form action="process_payment.php" method="post">
         <div class="mb-3">
           <label for="paymentInfo" class="form-label">Our public key:

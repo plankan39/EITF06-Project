@@ -41,6 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
           Please write your password.
         </div>
       </div>
+      <div class="form-group">
+        <label for="post-address" class="form-label">Post Address</label>
+        <input type="text" class="form-control" id="post-address" placeholder="Post Address" name="post-address"required>
+        <div class="invalid-feedback">
+          Please write your postal address.
+        </div>
+      </div>
       <button type="submit" class="btn btn-primary">Sign up</button>
       <button type="button" class="btn btn-secondary" onClick="window.location = '/signin.php'">Sign in</button>
     </form>
