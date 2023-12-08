@@ -15,8 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $specialChars = preg_match('@[^\w]@', $pw);
 
   $ua = new UserAccess();
-  $passwords = $ua -> checkPassword($pw);
-
+  
 
   if(!($uppercase && $lowercase && $number && $specialChars && strlen($pw) >= 8)) {
     echo 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
