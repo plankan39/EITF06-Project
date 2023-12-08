@@ -12,6 +12,6 @@ ADD ./payment/SimpleCoin/simpleCoin/miner.py /app
 ADD ./payment/SimpleCoin/simpleCoin/miner_config.py /app
 ADD ./payment/SimpleCoin/simpleCoin/wallet.py /app
 
-EXPOSE 5000
+# EXPOSE 5000
 
-CMD ["python", "miner.py", "--port", "5000"]
+CMD ["python", "miner.py"]
