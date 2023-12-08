@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db:3306
--- Generation Time: Nov 24, 2023 at 09:01 AM
+-- Generation Time: Dec 08, 2023 at 09:07 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.8
 
@@ -24,44 +24,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `item`
+-- Table structure for table `password_blacklist`
 --
 
-CREATE TABLE `item` (
-  `id` int UNSIGNED NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `price` DECIMAL(8, 2) UNSIGNED NOT NULL,
-  `description` varchar(200) NOT NULL
+CREATE TABLE `password_blacklist` (
+  `password` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `item`
+-- Dumping data for table `password_blacklist`
 --
 
-INSERT INTO `item` (`id`, `name`, `price`, `description`) VALUES
-(1, 'Item 1', 1.5, 'Very nice Item 1'),
-(3, 'Item 3', 3, 'Very nice Item 3'),
-(2, 'Item 2', 4, 'Very nice Item 2');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `item`
---
-ALTER TABLE `item`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `item`
---
-ALTER TABLE `item`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+INSERT INTO `password_blacklist` (`password`) VALUES
+('password');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

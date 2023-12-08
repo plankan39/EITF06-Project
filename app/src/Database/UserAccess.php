@@ -42,7 +42,8 @@ class UserAccess extends DataAccess {
         return null;
       }
 
-
+      /*To SQL Inject authentication you can write in the user field: '";{Insert SQL command here}"'  */ 
+      
       $stmt->setFetchMode(\PDO::FETCH_CLASS, User::class);
       $user = $stmt->fetch();
 
@@ -51,5 +52,20 @@ class UserAccess extends DataAccess {
       } else {
         return null;
       }
-    }
+  }
+    /**
+     * @param mixed $password
+     */
+  public function checkPassword($password) {
+    $sql = "SELECT DISTINCT password FROM password_blacklist";
+    $stmt = $this->connection->prepare($sql);
+    $stmt->execute();
+      
+    $passwords = $stmt -> fetchAll();
+    
+    $passwords = array_map(function ($item){return strtolower($item["password"]);}, $passwords);
+
+
+    return !in_array(strtolower($password), $passwords);
+  }
 }
