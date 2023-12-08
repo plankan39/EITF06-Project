@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $ua = new UserAccess();
   if ($codeInject) {
     echo 'Dont inject code, Invalid characters in field';
-  }else if($uppercase && $lowercase && $number && $specialChars && strlen($pw) >= 8) {
+  }else if(!($uppercase && $lowercase && $number && $specialChars && strlen($pw) >= 8)) {
       echo 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
   } else if (!$ua->checkPassword($pw)) {
     echo "password too insecure";
