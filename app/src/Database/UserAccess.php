@@ -57,13 +57,16 @@ class UserAccess extends DataAccess {
     /**
      * @param mixed $password
      */
-  public function checkPassword($password): bool {
+  public function checkPassword($password) {
     $sql = "SELECT DISTINCT password FROM password_blacklist";
     $stmt = $this->connection->prepare($sql);
     $stmt->execute();
       
     $passwords = $stmt -> fetchAll();
+    
+    $passwords = array_map(function ($item){return strtolower($item["password"]);}, $passwords);
 
-    return !in_array($password, $passwords);
+
+    return !in_array(strtolower($password), $passwords);
   }
 }

@@ -15,16 +15,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $specialChars = preg_match('@[^\w]@', $pw);
 
   $ua = new UserAccess();
+  $passwords = $ua -> checkPassword($pw);
 
-if($uppercase && $lowercase && $number && $specialChars && strlen($pw) >= 8) {
-  echo 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
+
+  if(!($uppercase && $lowercase && $number && $specialChars && strlen($pw) >= 8)) {
+    echo 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
   } else if (!$ua->checkPassword($pw)) {
     echo "password too insecure";
-
-} else {
-  $ua->addUser($email, $pw, $address);
-}
-
+  } else {
+    $ua->addUser($email, $pw, $address);
+  }
 }
 ?>
 <!doctype html>
@@ -52,13 +52,6 @@ if($uppercase && $lowercase && $number && $specialChars && strlen($pw) >= 8) {
         <label for="exampleInputPassword1" class="form-label">Password</label>
         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password"
           required>
-        <div>
-        <?php 
-        if ($_SERVER["REQUEST_METHOD"] === "POST" && (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($pw) < 8)) {
-          echo 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
-        }
-        ?>
-        </div>
       </div>
       <div class="form-group">
         <label for="post-address" class="form-label">Post Address</label>
