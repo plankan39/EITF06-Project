@@ -33,16 +33,14 @@ class UserAccess extends DataAccess {
      */
     public function authenticateUser($email, $password): User|null {
       $passwordHash = $password;
-      $sql = "SELECT * FROM {$this->table} WHERE email = /** :email */'{$email}' ";
+      $sql = "SELECT * FROM {$this->table} WHERE email = :email ";
       
       $stmt = $this->connection->prepare($sql);
-      $stmt->execute([/*':email' => $email*/]);
+      $stmt->execute([':email' => $email]);
       
       if ($stmt->rowCount() === 0) {
         return null;
       }
-
-      /*To SQL Inject authentication you can write in the user field: '";{Insert SQL command here}"'  */ 
 
 
       $stmt->setFetchMode(\PDO::FETCH_CLASS, User::class);
