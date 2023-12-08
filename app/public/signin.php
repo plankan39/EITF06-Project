@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <form action="signin.php" method="post">
       <div class="form-group">
         <label for="emailField" class="form-label">Email address</label>
-        <input type="text" class="form-control" id="emailField" placeholder="Enter email" name="email" required>
+        <input type="email" class="form-control" id="emailField" placeholder="Enter email" name="email" required>
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1" class="form-label">Password</label>

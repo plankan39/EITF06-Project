@@ -39,7 +39,7 @@ if($uppercase && $lowercase && $number && $specialChars && strlen($pw) >= 8) {
     <form action="signup.php" method="post">
       <div class="form-group">
         <label for="emailField" class="form-label">Email address</label>
-        <input type="text" class="form-control" id="emailField" placeholder="Enter email" name="email" required>
+        <input type="email" class="form-control" id="emailField" placeholder="Enter email" name="email" required>
         <div class="invalid-feedback">
           Please write your email.
         </div>
