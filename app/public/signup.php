@@ -14,10 +14,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $number    = preg_match('@[0-9]@', $pw);
   $specialChars = preg_match('@[^\w]@', $pw);
 
+  $ua = new UserAccess();
+
 if($uppercase && $lowercase && $number && $specialChars && strlen($pw) >= 8) {
   echo 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
-}else{
-  $ua = new UserAccess();
+  } else if (!$ua->checkPassword($pw)) {
+    echo "password too insecure";
+
+} else {
   $ua->addUser($email, $pw, $address);
 }
 
