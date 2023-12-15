@@ -67,14 +67,31 @@ $totalPrice = array_reduce(
               <?php echo $totalPrice; ?>
             </td>
           </tr>
+          <?php if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["paymentInfo"]) {
+            echo '
+            <tr>
+              <th scope="row">Payment hash </th>
+              <td>'.
+                $_POST["paymentInfo"].
+              '</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>';
+            }
+          ?>
         </tbody>
       </table>
-
-      <h2>Please submit a payment of
-        <?php echo $totalPrice; ?> SimpleCoin to the following address
-      </h2>
-
-      <form action="process_payment.php" method="post">
+      <?php if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["paymentInfo"]) {
+          echo '<h2>Thank you for your purchase</h2>';
+        } else {
+        echo '
+        
+        <h2>Please submit a payment of '. $totalPrice .
+        ' SimpleCoin to the following address</h2>';
+        }
+        ?>
+      <form action="confirmpayment.php" method="post">
         <div class="mb-3">
           <label for="paymentInfo" class="form-label">Our public key:
             OsGUOWtF/E+1O3gwhOW70uDMzJAi0dAm4LWz9ZNHhBYu3t77w1izC0wS5w72IZ476/YiOmp49b+HYFI39c++eg==</label>
