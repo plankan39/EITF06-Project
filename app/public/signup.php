@@ -11,18 +11,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   // Validate password strength
   $uppercase = preg_match('@[A-Z]@', $pw);
   $lowercase = preg_match('@[a-z]@', $pw);
-  $number    = preg_match('@[0-9]@', $pw);
+  $number = preg_match('@[0-9]@', $pw);
   $specialChars = preg_match('@[^\w]@', $pw);
-  $codeInject = preg_match('@[<>";]@' ,$email);
+  $codeInject = preg_match('@[<>";]@', $email);
 
   $ua = new UserAccess();
   if ($codeInject) {
     echo 'Invalid characters in field';
-  }else if(!($uppercase && $lowercase && $number && $specialChars && strlen($pw) >= 8)) {
-      echo 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
+  } else if (!($uppercase && $lowercase && $number && $specialChars && strlen($pw) >= 8)) {
+    echo 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
   } else if (!$ua->checkPassword($pw)) {
     echo "password too insecure";
-  } else{
+  } else {
     $ua = new UserAccess();
     $ua->addUser($email, $pw, $address);
   }
@@ -56,7 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       </div>
       <div class="form-group">
         <label for="post-address" class="form-label">Post Address</label>
-        <input type="text" class="form-control" id="post-address" placeholder="Post Address" name="post-address"required>
+        <input type="text" class="form-control" id="post-address" placeholder="Post Address" name="post-address"
+          required>
         <div class="invalid-feedback">
           Please write your postal address.
         </div>

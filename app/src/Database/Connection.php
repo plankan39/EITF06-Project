@@ -16,7 +16,8 @@ class Connection
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
   ];
 
-  private function __construct() {
+  private function __construct()
+  {
     $dsn = "mysql:host={$_ENV['MYSQL_HOST']};dbname={$_ENV['MYSQL_DATABASE']};port={$_ENV['MYSQL_PORT']}";
 
     try {
@@ -34,15 +35,17 @@ class Connection
     }
   }
 
-  public static function getInstance(): self {
-      if (self::$instance === null) {
-          self::$instance = new self();
-      }
+  public static function getInstance(): self
+  {
+    if (self::$instance === null) {
+      self::$instance = new self();
+    }
 
-      return self::$instance;
+    return self::$instance;
   }
 
-  public function getPdo(): PDO {
+  public function getPdo(): PDO
+  {
     return $this->pdo;
   }
 }
