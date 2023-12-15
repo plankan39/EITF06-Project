@@ -36,7 +36,7 @@ CREATE TABLE `password_blacklist` (
 --
 
 INSERT INTO `password_blacklist` (`password`) VALUES
-('password');
+('Password123!');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
